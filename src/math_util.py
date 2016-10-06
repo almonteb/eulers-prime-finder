@@ -8,6 +8,11 @@ E = str(Decimal(1).exp()).replace('.', '')
 
 
 def find_xth_prime(x, num_digits):
+    '''
+    Finds the xth num_digits prime in Euler's constant.
+    If found, returns a Prime object containing, x, num_digits, its prime value, as well as the position it was found.
+    If not found, raises an InvalidUsage ex
+    '''
     prime_iters = 0
 
     for i in range(0, len(E) - num_digits):
@@ -21,6 +26,7 @@ def find_xth_prime(x, num_digits):
 
 
 def is_prime(num):
+    '''Returns true if num is a prime'''
     if num > 2 and num % 2 == 0:
         return False
     for i in range(3, int(math.sqrt(num)) + 1, 2):

@@ -17,6 +17,7 @@ $(document).ready(function () {
                 handle_error(data);
             }
         });
+        // Skip default form handling behavior
         event.preventDefault();
     });
 
@@ -38,10 +39,12 @@ $(document).ready(function () {
                 handle_error(data);
             }
         });
+        // Skip default form handling behavior
         event.preventDefault();
     });
 
     function handle_primes(data) {
+        // Iterate the primes data object, construct a table and add a row for each prime returned.
         var content = '<table border=1>';
         content += '<tr><th>Xth</th><th>Y # of digits</th><th>Prime</th><th>Position</th></tr>';
         $.each(data.primes, function (index, prime) {
@@ -53,11 +56,13 @@ $(document).ready(function () {
     }
 
     function handle_error(data) {
+        // Display & log errors that came back from the API.
         console.log(data);
         $('#results').html("Error: " + data.responseJSON.error);
     }
 
     function clear_results() {
+        // Clears the results div
         $('#results').html('');
     }
 });

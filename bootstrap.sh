@@ -2,7 +2,15 @@
 
 set -eo pipefail
 
-which virtualenv >/dev/null
+if ! which pip >/dev/null; then
+    echo "pip not found -- installing. NOTE: you may be prompted for your password.'"
+    sudo easy_install pip
+fi
+
+if ! which virtualenv >/dev/null; then
+    echo "virtualenv not found -- installing. NOTE: you may be prompted for your password.'"
+    sudo pip install virtualenv
+fi
 
 if [[ ! -d env ]]; then
     echo "Preparing virtualenv"

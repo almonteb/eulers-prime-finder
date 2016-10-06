@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Euler's Prime Finder</title>
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='home.js') }}"></script>
+<body>
+<table>
+    <tr>
+        <th><label for="x">X:</label></th>
+        <td><input type="text" name="x" id="x"/></td>
+    </tr>
+    <tr>
+        <th><label for="y">Y:</label></th>
+        <td><input type="text" name="y" id="y"/></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="button" id="singleSubmit" value="Submit"/></td>
+    </tr>
+    <tr>
+        <th colspan="2" align="center">--or--</th>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="file" name="file" id="file"/></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="button" id="uploadSubmit" value="Upload"/></td>
+    </tr>
+</table>
+<br/>
+<div id="results"></div>
+</body>
+</html>

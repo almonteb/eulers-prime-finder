@@ -10,6 +10,7 @@ class MathUtilTest(unittest.TestCase):
           (3, 3, 523, 15),
           (4, 5, 24977, 33),
           (5, 12, 738132328627, 157),
+          (10, 9, 675092447, 233),
           (7, 6, 630353, 70))
     @unpack
     def test_find_xth_prime(self, xth, num_digits, prime, pos):
@@ -19,8 +20,7 @@ class MathUtilTest(unittest.TestCase):
         self.assertEqual(p.prime, prime)
         self.assertEqual(p.pos, pos)
 
-    @data((6, 12),
-          (7, 12))
+    @data((2000, 2),)
     @unpack
     def test_find_xth_prime_fail(self, xth, num_digits):
         with self.assertRaises(InvalidUsage):

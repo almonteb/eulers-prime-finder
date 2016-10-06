@@ -3,7 +3,7 @@ from decimal import *
 import math
 
 # Set E constant & remove decimal
-getcontext().prec = 170  # max precision for 5, 12
+getcontext().prec = 2000
 E = str(Decimal(1).exp()).replace('.', '')
 
 

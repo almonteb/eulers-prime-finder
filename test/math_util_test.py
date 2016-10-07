@@ -30,11 +30,11 @@ class MathUtilTest(unittest.TestCase):
         self.assertIsNone(p.pos)
         self.assertEqual(p.error, "Unable to calculate")
 
-    @data(1, 2, 3, 5, 7, 353, 24709, 3232862794349, 7099983170353)
+    @data(2, 3, 5, 7, 353, 24709, 3232862794349, 7099983170353)
     def test_is_prime(self, num):
         self.assertTrue(math_util.is_prime(num))
 
-    @data(4, 6, 10, 2002, 900000000)
+    @data(0, 1, 4, 6, 10, 2002, 900000000)
     def test_is_not_prime(self, num):
         self.assertFalse(math_util.is_prime(num))
 

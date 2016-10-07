@@ -55,19 +55,23 @@ def process_primes(inputs):
     primes = []
     for input in inputs:
         logging.info("Computing xth: {0}, num_digits: {1}".format(input['xth'], input['num_digits']))
-        if input_util.is_int(input['xth']):
+        if input_util.is_int(input['xth']) and int(input['xth']) > 0:
             input['xth'] = int(input['xth'])
         else:
             primes.append(Prime(input['xth'], input['num_digits'],
                                 error="{0} is an invalid value for X".format(input['xth'])))
             continue
 
-        if input_util.is_int(input['num_digits']):
+        if input_util.is_int(input['num_digits']) and int(input['num_digits']) > 0:
             input['num_digits'] = int(input['num_digits'])
         else:
             primes.append(Prime(input['xth'], input['num_digits'],
                                 error="{0} is an invalid value for Y".format(input['num_digits'])))
             continue
+
+        if input['xth'] < 0:
+            primes.append(Prime(input['xth'], input['num_digits'],
+                                error="{0} digits is too computationally expensive, try a bit lower".format(input['num_digits'])))
 
         if input['num_digits'] > 12:
             primes.append(Prime(input['xth'], input['num_digits'],

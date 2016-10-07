@@ -27,6 +27,8 @@ def find_xth_prime(x, num_digits):
 
 def is_prime(num):
     '''Returns true if num is a prime'''
+    if num < 2:
+        return False
     if num > 2 and num % 2 == 0:
         return False
     for i in range(3, int(math.sqrt(num)) + 1, 2):

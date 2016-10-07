@@ -1,8 +1,11 @@
+from ddt import ddt, data
+
 import unittest
 import app
 import json
 
 
+@ddt
 class AppTest(unittest.TestCase):
     def setUp(self):
         self.app = app.app.test_client()
@@ -27,21 +30,23 @@ class AppTest(unittest.TestCase):
         self.assertIsNone(data[0]['pos'])
         self.assertEqual('20 digits is too computationally expensive, try a bit lower', data[0]['error'])
 
-    def test_process_bad_x(self):
-        prime = app.process_primes(({'xth': 'a', 'num_digits': 1},))[0]
-        self.assertEqual('a', prime.xth)
+    @data('a', None, -1)
+    def test_process_bad_x(self, val):
+        prime = app.process_primes(({'xth': val, 'num_digits': 1},))[0]
+        self.assertEqual(val, prime.xth)
         self.assertEqual(1, prime.num_digits)
         self.assertIsNone(prime.prime)
         self.assertIsNone(prime.pos)
-        self.assertEqual('a is an invalid value for X', prime.error)
+        self.assertEqual('{0} is an invalid value for X'.format(val), prime.error)
 
-    def test_process_bad_y(self):
-        prime = app.process_primes(({'xth': 2, 'num_digits': 'x'},))[0]
+    @data('a', None, -1)
+    def test_process_bad_y(self, val):
+        prime = app.process_primes(({'xth': 2, 'num_digits': val},))[0]
         self.assertEqual(2, prime.xth)
-        self.assertEqual('x', prime.num_digits)
+        self.assertEqual(val, prime.num_digits)
         self.assertIsNone(prime.prime)
         self.assertIsNone(prime.pos)
-        self.assertEqual('x is an invalid value for Y', prime.error)
+        self.assertEqual('{0} is an invalid value for Y'.format(val), prime.error)
 
     def test_process_large_y(self):
         prime = app.process_primes(({'xth': 2, 'num_digits': 100},))[0]

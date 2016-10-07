@@ -1,28 +1,17 @@
 import input_util
 import unittest
 from ddt import ddt, data
-from responses import InvalidUsage
 
 
 @ddt
 class InputUtilTest(unittest.TestCase):
     @data('1', '100', 1, 100)
-    def test_intify(self, val):
-        self.assertEqual(int(val), input_util.intify(val))
+    def test_is_int(self, val):
+        self.assertTrue(input_util.is_int(val))
 
     @data('test', None, '')
-    def test_intify_fail(self, val):
-        with self.assertRaises(InvalidUsage):
-            input_util.intify(val)
-
-    @data(1, 2, 3, 10, 12)
-    def test_assert_valid_num_digits(self, num):
-        input_util.assert_valid_num_digits(num)
-
-    @data(13, 100)
-    def test_assert_valid_num_digits_fail(self, num):
-        with self.assertRaises(InvalidUsage):
-            input_util.assert_valid_num_digits(num)
+    def test_is_int_fail(self, val):
+        self.assertFalse(input_util.is_int(val))
 
 
 if __name__ == '__main__':

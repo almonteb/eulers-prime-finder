@@ -1,4 +1,4 @@
-from responses import InvalidUsage, Prime
+from responses import Prime
 from decimal import *
 import math
 
@@ -22,7 +22,7 @@ def find_xth_prime(x, num_digits):
             if prime_iters == x:
                 return Prime(x, num_digits, num, i)
 
-    raise InvalidUsage("Unable to calculate")
+    return Prime(x, num_digits, error="Unable to calculate")
 
 
 def is_prime(num):

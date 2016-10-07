@@ -1,7 +1,6 @@
 import unittest
 import math_util
 from ddt import ddt, data, unpack
-from responses import InvalidUsage
 
 
 @ddt
@@ -19,12 +18,17 @@ class MathUtilTest(unittest.TestCase):
         self.assertEqual(p.num_digits, num_digits)
         self.assertEqual(p.prime, prime)
         self.assertEqual(p.pos, pos)
+        self.assertIsNone(p.error)
 
     @data((2000, 2),)
     @unpack
     def test_find_xth_prime_fail(self, xth, num_digits):
-        with self.assertRaises(InvalidUsage):
-            math_util.find_xth_prime(xth, num_digits)
+        p = math_util.find_xth_prime(xth, num_digits)
+        self.assertEqual(p.xth, xth)
+        self.assertEqual(p.num_digits, num_digits)
+        self.assertIsNone(p.prime)
+        self.assertIsNone(p.pos)
+        self.assertEqual(p.error, "Unable to calculate")
 
     @data(1, 2, 3, 5, 7, 353, 24709, 3232862794349, 7099983170353)
     def test_is_prime(self, num):

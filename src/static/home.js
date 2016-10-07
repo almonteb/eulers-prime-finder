@@ -47,9 +47,13 @@ $(document).ready(function () {
         // Iterate the primes data object, construct a table and add a row for each prime returned.
         var content = '<table border=1>';
         content += '<tr><th>Xth</th><th>Y # of digits</th><th>Prime</th><th>Position</th></tr>';
-        $.each(data.primes, function (index, prime) {
-            content += '<tr><td>' + prime.xth + '</td><td>' + prime.num_digits + '</td><td>' + prime.prime + '</td><td>' + prime.pos + '</td></tr>'
-
+        $.each(data, function (index, prime) {
+            content += '<tr><td>' + prime.xth + '</td><td>' + prime.num_digits + '</td>';
+            if (prime.error) {
+                content += '<td colspan=2>' + prime.error + '</td></tr>'
+            } else {
+                content += '<td>' + prime.prime + '</td><td>' + prime.pos + '</td></tr>'
+            }
         });
         content += '</table>';
         $('#results').html(content)
